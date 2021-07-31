@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import React from 'react';
-import data from '../../utils/data';
+// import data from '../../utils/data';
 import Layout from '../components/Layout';
 import NextLink from 'next/link';
 import {
@@ -14,12 +14,15 @@ import {
 } from '@material-ui/core';
 import Image from 'next/image';
 import useStyles from '../../utils/styles';
+import Product from '../../models/Product';
+import db from '../../utils/db';
 
-const ProductScreen = () => {
+const ProductScreen = (props) => {
+  const { product } = props;
   const classes = useStyles();
-  const router = useRouter();
-  const { slug } = router.query;
-  const product = data.products.find((item) => item.slug === slug);
+  // const router = useRouter();
+  // const { slug } = router.query;
+  // const product = data.products.find((item) => item.slug === slug);
 
   if (!product) {
     return <div>Product not found</div>;
@@ -46,7 +49,9 @@ const ProductScreen = () => {
         <Grid item md={3} xs={12}>
           <List>
             <ListItem>
-              <Typography component='h1' variant='h1'>{product.name}</Typography>
+              <Typography component='h1' variant='h1'>
+                {product.name}
+              </Typography>
             </ListItem>
             <ListItem>
               <Typography>Category: {product.category}</Typography>
@@ -90,7 +95,9 @@ const ProductScreen = () => {
                 </Grid>
               </ListItem>
               <ListItem>
-                <Button fullWidth variant='contained' color='primary'>Add to cart</Button>
+                <Button fullWidth variant='contained' color='primary'>
+                  Add to cart
+                </Button>
               </ListItem>
             </List>
           </Card>
@@ -99,5 +106,19 @@ const ProductScreen = () => {
     </Layout>
   );
 };
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { slug } = params;
+  
+  await db.connect();
+  const product = await Product.findOne({ slug }).lean();
+  await db.disconnect();
+  return {
+    props: {
+      product: db.convertDocToObj(product),
+    },
+  };
+}
 
 export default ProductScreen;
