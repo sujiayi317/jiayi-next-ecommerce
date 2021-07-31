@@ -8,9 +8,9 @@ import {
   CardActions,
   Button,
 } from '@material-ui/core';
-import Head from 'next/head';
-import Image from 'next/image';
-import styles from '../styles/Home.module.css';
+// import Head from 'next/head';
+// import Image from 'next/image';
+// import styles from '../styles/Home.module.css';
 import data from '../utils/data';
 import Layout from './components/Layout';
 import NextLink from 'next/link';
