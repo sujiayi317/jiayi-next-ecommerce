@@ -29,7 +29,7 @@ export default function Layout({ children }) {
           </div>
           <div>
             <NextLink href='/cart' passHref>
-              <Link>Card</Link>
+              <Link>Cart</Link>
             </NextLink>
             <NextLink href='/login' passHref>
               <Link>Login</Link>
