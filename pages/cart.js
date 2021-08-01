@@ -22,13 +22,29 @@ import Layout from './components/Layout';
 import NextLink from 'next/link';
 import Image from 'next/image';
 import DeleteIcon from '@material-ui/icons/Delete';
+import axios from 'axios';
 
 const CartScreen = () => {
-  const { state } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   // const { cartItems } = state.cart; // Alternatively
   const {
     cart: { cartItems },
   } = state;
+
+  const updateCartHandler = async (item, quantity) => {
+    const { data } = await axios.get(`/api/products/${item._id}`);
+    if (data.countInStock < quantity) {
+      window.alert('Sorry, product is out of stock');
+      return;
+    }
+    
+    dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
+  };
+
+  const removeItemHandler = (item) => {
+    dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+  };
+
   return (
     <Layout title='Shopping Cart'>
       <Typography component='h1' variant='h1'>
@@ -36,7 +52,10 @@ const CartScreen = () => {
       </Typography>
       {cartItems.length === 0 ? (
         <div>
-          Cart is empty. <NextLink href='/'>Go shopping</NextLink>
+          Cart is empty.{' '}
+          <NextLink href='/' passHref>
+            <Link>Go shopping</Link>
+          </NextLink>
         </div>
       ) : (
         <Grid container spacing={1}>
@@ -75,7 +94,12 @@ const CartScreen = () => {
                         </NextLink>
                       </TableCell>
                       <TableCell align='right'>
-                        <Select value={item.quantity}>
+                        <Select
+                          value={item.quantity}
+                          onChange={(e) =>
+                            updateCartHandler(item, e.target.value)
+                          }
+                        >
                           {[...Array(item.countInStock).keys()].map((x) => (
                             <MenuItem key={x + 1} value={x + 1}>
                               {x + 1}
@@ -93,6 +117,7 @@ const CartScreen = () => {
                         <IconButton
                           aria-label='delete'
                           color='primary'
+                          onClick={() => removeItemHandler(item)}
                         >
                           <DeleteIcon />
                         </IconButton>
