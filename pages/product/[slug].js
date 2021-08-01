@@ -18,8 +18,10 @@ import Product from '../../models/Product';
 import db from '../../utils/db';
 import { Store } from '../../utils/Store';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const ProductScreen = (props) => {
+  const router = useRouter();
   const { dispatch } = useContext(Store);
   const { product } = props;
   const classes = useStyles();
@@ -38,6 +40,7 @@ const ProductScreen = (props) => {
       return;
     }
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity: 1 } });
+    router.push('/cart');
   };
 
   return (
