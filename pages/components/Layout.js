@@ -1,7 +1,7 @@
 import {
   AppBar,
   Container,
-  createMuiTheme,
+  createTheme,
   Link,
   Toolbar,
   Typography,
@@ -20,7 +20,7 @@ import Cookies from 'js-cookie';
 export default function Layout({ title, description, children }) {
   const { state, dispatch } = useContext(Store);
   const { darkMode, cart } = state;
-  const theme = createMuiTheme({
+  const theme = createTheme({
     typography: {
       h1: {
         fontSize: '1.6rem',
