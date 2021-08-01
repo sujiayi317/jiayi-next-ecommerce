@@ -2,6 +2,7 @@ import {
   Button,
   Card,
   Grid,
+  IconButton,
   Link,
   ListItem,
   MenuItem,
@@ -20,6 +21,7 @@ import { Store } from '../utils/Store';
 import Layout from './components/Layout';
 import NextLink from 'next/link';
 import Image from 'next/image';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const CartScreen = () => {
   const { state } = useContext(Store);
@@ -83,9 +85,17 @@ const CartScreen = () => {
                       </TableCell>
                       <TableCell align='right'>${item.price}</TableCell>
                       <TableCell align='right'>
-                        <Button variant='contained' color='secondary'>
-                          x
-                        </Button>
+                        {/* <Button
+                          variant='contained'
+                          color='secondary'
+                          startIcon={<DeleteIcon />}
+                        ></Button> */}
+                        <IconButton
+                          aria-label='delete'
+                          color='primary'
+                        >
+                          <DeleteIcon />
+                        </IconButton>
                       </TableCell>
                     </TableRow>
                   ))}
