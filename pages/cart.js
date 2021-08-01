@@ -23,8 +23,10 @@ import NextLink from 'next/link';
 import Image from 'next/image';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const CartScreen = () => {
+  const router = useRouter();
   const { state, dispatch } = useContext(Store);
   // const { cartItems } = state.cart; // Alternatively
   const {
@@ -37,12 +39,16 @@ const CartScreen = () => {
       window.alert('Sorry, product is out of stock');
       return;
     }
-    
+
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
   };
 
   const removeItemHandler = (item) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+  };
+
+  const checkoutHandler = () => {
+    router.push('./shipping');
   };
 
   return (
@@ -138,7 +144,12 @@ const CartScreen = () => {
                 </Typography>
               </ListItem>
               <ListItem>
-                <Button variant='contained' color='primary' fullWidth>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  fullWidth
+                  onClick={checkoutHandler}
+                >
                   Check Out
                 </Button>
               </ListItem>
