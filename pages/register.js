@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import React, { useContext } from 'react';
 import useStyles from '../utils/styles';
-import Layout from './components/Layout';
+import Layout from '../components/Layout';
 import NextLink from 'next/link';
 import axios from 'axios';
 import { Store } from '../utils/Store';

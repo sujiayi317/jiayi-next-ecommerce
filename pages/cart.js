@@ -18,7 +18,7 @@ import {
 import dynamic from 'next/dynamic';
 import React, { useContext } from 'react';
 import { Store } from '../utils/Store';
-import Layout from './components/Layout';
+import Layout from '../components/Layout';
 import NextLink from 'next/link';
 import Image from 'next/image';
 import DeleteIcon from '@material-ui/icons/Delete';

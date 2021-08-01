@@ -12,7 +12,7 @@ import {
 // import Image from 'next/image';
 // import styles from '../styles/Home.module.css';
 // import data from '../utils/data';
-import Layout from './components/Layout';
+import Layout from '../components/Layout';
 import NextLink from 'next/link';
 import db from '../utils/db';
 import Product from '../models/Product';
