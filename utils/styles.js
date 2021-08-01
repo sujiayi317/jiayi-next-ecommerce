@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   },
   brand: {
     fontWeight: 'bold',
-    fontSize: '1.5rem'
+    fontSize: '1.5rem',
   },
   grow: {
     flexGrow: '1',
@@ -28,12 +28,15 @@ const useStyles = makeStyles({
   },
   form: {
     maxWidth: 800,
-    margin: '0 auto'
+    margin: '0 auto',
   },
   navbarButton: {
     color: '#ffffff',
     textTransform: 'initial',
-  }
+  },
+  transparentBackground: {
+    backgroundColor: 'transparent',
+  },
 });
 
 export default useStyles;
